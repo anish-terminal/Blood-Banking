@@ -1,0 +1,233 @@
+<button class="logoutbtn" (click)="navigateHome()">
+  <i class="fa fa-home"></i> Home
+</button>
+
+<div class="container">
+  <h2 class="textual">Add new Donor</h2>
+  <form #addDonorform="ngForm" (ngSubmit)="addDonor()">
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Name</mat-label>
+        <input
+          matInput
+          placeholder="Enter Donor name"
+          name="donorname"
+          [(ngModel)]="donor.name"
+          required
+          #donorname="ngModel"
+          [class.is-invalid]="donorname.invalid && donorname.touched"
+        />
+        <mat-error *ngIf="donorname.invalid && donorname.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <small style="color: gray; font-size: 10px"
+      >Please enter full Name of the Donor with Initial</small
+    >
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Blood Group</mat-label>
+        <mat-select
+          placeholder="Select Blood Group"
+          name="bloodgroup"
+          [(ngModel)]="donor.bloodGroup"
+          #bloodgroup="ngModel"
+          required
+        >
+          <mat-option value="A+">A+</mat-option>
+          <mat-option value="A-">A-</mat-option>
+          <mat-option value="B+">B+</mat-option>
+          <mat-option value="B-">B-</mat-option>
+          <mat-option value="AB+">AB+</mat-option>
+          <mat-option value="AB-">AB-</mat-option>
+          <mat-option value="O+">O+</mat-option>
+          <mat-option value="O-">O-</mat-option>
+          <mat-option value="A+">A+</mat-option>
+        </mat-select>
+        <mat-error *ngIf="bloodgroup.invalid && bloodgroup.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Units of Blood</mat-label>
+        <mat-select
+          placeholder="Select Blood Units"
+          name="units"
+          id="sel1"
+          [(ngModel)]="donor.units"
+          #units="ngModel"
+          required
+        >
+          <mat-option value="1">1</mat-option>
+          <mat-option value="2">2</mat-option>
+          <mat-option value="3">3</mat-option>
+        </mat-select>
+
+        <mat-error *ngIf="units.invalid && units.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <small style="color: grey; font-size: 10px; font-weight: bold"
+      >Maximum units can be donated is 3 pints</small
+    >
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Mobile Number</mat-label>
+        <input
+          matInput
+          type="tel"
+          placeholder="Enter mobile number"
+          name="mobile"
+          [(ngModel)]="donor.mobile"
+          required
+          #mobile="ngModel"
+          [class.is-invalid]="mobile.invalid && mobile.touched"
+        />
+        <mat-error *ngIf="mobile.invalid && mobile.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <small style="color: gray; font-size: 10px"
+      >Please enter a valid mobile number</small
+    >
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Gender</mat-label>
+        <mat-select
+          placeholder="Select gender"
+          name="gender"
+          id="sel1"
+          [(ngModel)]="donor.gender"
+          #gender="ngModel"
+          required
+        >
+          <mat-option value="Male">Male</mat-option>
+          <mat-option value="Female">Female</mat-option>
+          <mat-option value="Others">Others</mat-option>
+        </mat-select>
+        <mat-error *ngIf="gender.invalid && gender.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Age</mat-label>
+        <input
+          matInput
+          type="number"
+          max="65"
+          placeholder="Enter Donor age"
+          name="age"
+          [(ngModel)]="donor.age"
+          required
+          #age="ngModel"
+          [class.is-invalid]="age.invalid && age.touched"
+        />
+        <mat-error *ngIf="age.invalid && age.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <small style="color: rgb(179, 11, 11); font-size: 10px; font-weight: bold"
+      >Maximum Age limit of donors is 65</small
+    >
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Location</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter Donor city name"
+          name="city"
+          [(ngModel)]="donor.city"
+          required
+          #city="ngModel"
+          [class.is-invalid]="city.invalid && city.touched"
+        />
+        <mat-error *ngIf="city.invalid && city.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Donor Street Address</mat-label>
+        <input
+          matInput
+          type="text"
+          placeholder="Enter Donor Street Address"
+          name="address"
+          [(ngModel)]="donor.address"
+          required
+          #address="ngModel"
+          [class.is-invalid]="address.invalid && address.touched"
+        />
+        <mat-error *ngIf="address.invalid && address.touched">
+          <span><b>Required field</b></span>
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <small style="color: gray; font-size: 10px"
+      >Please mention proper donor address for reference purpose</small
+    >
+    <!-- Date  -->
+    <div class="form-group">
+      <mat-form-field appearance="fill" class="mat-form-field-custom">
+        <mat-label>Choose a date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          placeholder="Enter donating date"
+          id="date"
+          name="date"
+          [(ngModel)]="donor.date"
+          required
+          #date="ngModel"
+          [class.is-invalid]="date.invalid && date.touched"
+        />
+        <small class="text-danger" [class.d-none]="date.valid || date.untouched"
+          ><b>required field</b></small
+        >
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="checkbox" style="margin-top: 5px">
+      <section class="example-section">
+        <mat-checkbox class="example-margin" name="remember" required
+          >Is he/she interested to donate blood</mat-checkbox
+        >
+        <small style="color: rgb(179, 11, 11); font-weight: bold">
+          (adding donors without interest is punishable !!!)</small
+        >
+      </section>
+    </div>
+    <button
+      style="margin-top: 15px"
+      [disabled]="addDonorform.form.invalid"
+      type="submit"
+      class="btn registerbtn"
+    >
+      Add Donor
+    </button>
+  </form>
+</div>

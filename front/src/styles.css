@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Mate+SC&display=swap');
+
+
+:root {
+  --primary-color: #ec3137;
+  --secondary-color: #490305;
+  --white-color:#fff;
+  --accent-color: #e74c3c;
+  --text-color: #333333;
+
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.textual {
+    color: var(--secondary-color);
+    text-align: center;
+    margin-top: -20px;
+    font-family: "Oswald", sans-serif;
+    font-weight: bolder;
+    padding: 5px;
+    text-transform: uppercase;
+  }
+
+  .sidebar-logo {
+    padding: 10px 15px 10px 30px;
+    font-size: 20px;
+    text-align: right;
+    background-color:var(--primary-color);
+    width: 100%;
+  }
+
+  .sidebar-text
+  {
+      font-size: small;
+  }
+
+  .logoutbtn{
+    border: none;
+    background:transparent;
+    color: var(--white-color) ;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    margin-left: 10px;
+    padding: 5px 10px 5px 10px;
+    font-size: small;
+    font-weight: bold;
+  }
+
+  .logoutbtn:hover{
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    padding: 5px 8px 5px 8px;
+    border-radius: 15px;
+    border: none;
+  }
