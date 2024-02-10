@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { User } from '../user';
 import { RegistrationService } from '../registration.service';
 import { Router } from '@angular/router';
+import { AccountService } from '../_services/account.service';
 
 @Component({
   selector: 'app-registration',
@@ -11,6 +12,9 @@ import { Router } from '@angular/router';
 })
 
 export class RegistrationComponent implements OnInit {
+  
+  model : any = {};
+  
   user = new User();
   msg = '';
   
@@ -18,7 +22,7 @@ export class RegistrationComponent implements OnInit {
   showConfirmPassword:boolean = false;
 
 
-  constructor(private _service: RegistrationService, private _router: Router) { }
+  constructor(private _service: RegistrationService, private _router: Router, private accountService : AccountService) { }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -33,23 +37,32 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  registerUser() {
-    this._service.registerUserFromRemote(this.user).subscribe(
-      data => {
-        console.log("Registration Success");
-        sessionStorage.setItem("USER", this.user.username); // Use sessionStorage consistently
-        this._router.navigate(['/registrationsuccess']);
+  // registerUser() {
+  //   this._service.registerUserFromRemote(this.user).subscribe(
+  //     data => {
+  //       console.log("Registration Success");
+  //       sessionStorage.setItem("USER", this.user.username); // Use sessionStorage consistently
+  //       this._router.navigate(['/registrationsuccess']);
+  //     },
+  //     error => {
+  //       console.log("Registration Failed");
+  //       console.error(error);  // Log the entire error object for debugging
+  //       if (error.error && error.error.message) {
+  //         this.msg = error.error.message;  // Display a specific error message if available
+  //       } else {
+  //         this.msg = "User registration failed. Please try again.";  // Generic error message
+  //       }
+  //     }
+  //   );
+  // }
+  register()
+  {
+    this.accountService.register(this.model).subscribe({
+      next : response => {
+        console.log(response);
       },
-      error => {
-        console.log("Registration Failed");
-        console.error(error);  // Log the entire error object for debugging
-        if (error.error && error.error.message) {
-          this.msg = error.error.message;  // Display a specific error message if available
-        } else {
-          this.msg = "User registration failed. Please try again.";  // Generic error message
-        }
-      }
-    );
+      error : error => console.log(error)
+    })
   }
 
 

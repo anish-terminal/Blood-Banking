@@ -4,8 +4,10 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegistrationService } from '../registration.service';
 import { User } from '../user';
+import { MyUser } from '../_models/MyUser';
 import * as $ from 'jquery'
 import { AccountService } from '../_services/account.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,10 @@ import { AccountService } from '../_services/account.service';
 })
 export class LoginComponent implements OnInit {
 
-  loggedIn = false;
+  IsAdmin = false;
+  // currentuser$ : Observable<MyUser | null> = of (null);
+  // loggedIn = false;
+
   user = new User();
   msg = "";
   adminEmail = "";
@@ -30,75 +35,79 @@ export class LoginComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
-  constructor(private _service : RegistrationService, private _router : Router , private accountService : AccountService) { }
+  constructor(private _service : RegistrationService, private _router : Router , public accountService : AccountService) { }
 
   ngOnInit(): void 
   {
-    this.user.email = "user@gmail.com";
-    this.user.password = "user123";
+
+    // this.getCurrentUser();
+    // this.currentuser$ = this.accountService.currentUser$;
+
+    // this.user.email = "user@gmail.com";
+    // this.user.password = "user123";
     
-    $(".admin-login-form").hide();
-    $(".userlogin").click(function(){
-      $(".user-login-form").hide();
-      $(".admin-login-form").show();
-    });
+    // $(".admin-login-form").hide();
+    // $(".userlogin").click(function(){
+    //   $(".user-login-form").hide();
+    //   $(".admin-login-form").show();
+    // });
     
-    $(".adminlogin").click(function(){
-      $(".user-login-form").show();
-      $(".admin-login-form").hide();
-    });
+    // $(".adminlogin").click(function(){
+    //   $(".user-login-form").show();
+    //   $(".admin-login-form").hide();
+    // });
 
-    let currentUrl = window.location.href;
-    if (currentUrl.includes('/userdashboard')) 
-    {
-        window.onpopstate = function() 
-        {
-            history.go(1);
-        }
-    }
+    // let currentUrl = window.location.href;
+    // if (currentUrl.includes('/userdashboard')) 
+    // {
+    //     window.onpopstate = function() 
+    //     {
+    //         history.go(1);
+    //     }
+    // }
 
   }
 
-  loginUser()
-  {
-      this._service.loginUserFromRemote(this.user.email,this.user.password).subscribe(
-        (data: any) => {
-          console.log(data);
-          console.log("Response Received");
-          sessionStorage.setItem('loggedUser', this.user.email);
-          sessionStorage.setItem('USER', "user");
-          sessionStorage.setItem('ROLE', "user");
-          this._router.navigate(['/userdashboard']);
-        },
-        (error: { error: any; }) => {
-          console.log(error.error);
-          this.msg="Bad credentials, please enter valid credentials !!!";
-        }
-      )
-  }
+  // loginUser()
+  // {
+  //     this._service.loginUserFromRemote(this.user.email,this.user.password).subscribe(
+  //       (data: any) => {
+  //         console.log(data);
+  //         console.log("Response Received");
+  //         sessionStorage.setItem('loggedUser', this.user.email);
+  //         sessionStorage.setItem('USER', "user");
+  //         sessionStorage.setItem('ROLE', "user");
+  //         this._router.navigate(['/userdashboard']);
+  //       },
+  //       (error: { error: any; }) => {
+  //         console.log(error.error);
+  //         this.msg="Bad credentials, please enter valid credentials !!!";
+  //       }
+  //     )
+  // }
 
-  adminLogin()
-  {
-    if(this._service.adminLoginFromRemote(this.adminEmail, this.adminPassword)) 
-    {
-      sessionStorage.setItem('loggedUser', this.adminEmail);
-      sessionStorage.setItem('USER', "admin");
-      sessionStorage.setItem('ROLE', "admin");
-      this._router.navigate(['/loginsuccess']);
-    }
-    else 
-    {
-      console.log("Exception Occured");
-      this.msg = 'Bad admin credentials !!!'
-    }
-  }
+  // adminLogin()
+  // {
+  //   if(this._service.adminLoginFromRemote(this.adminEmail, this.adminPassword)) 
+  //   {
+  //     sessionStorage.setItem('loggedUser', this.adminEmail);
+  //     sessionStorage.setItem('USER', "admin");
+  //     sessionStorage.setItem('ROLE', "admin");
+  //     this._router.navigate(['/loginsuccess']);
+  //   }
+  //   else 
+  //   {
+  //     console.log("Exception Occured");
+  //     this.msg = 'Bad admin credentials !!!'
+  //   }
+  // }
 
   login()
   {
     this.accountService.login(this.user).subscribe({
       next : Response => {
         console.log(this.user);
-        this.loggedIn = true;
+        // this.loggedIn = true;
       },
       error : error => console.log(error)
     })
@@ -106,7 +115,21 @@ export class LoginComponent implements OnInit {
 
   logout()
   {
-    this.loggedIn = false;
+    this.accountService.logout();
+    // this.loggedIn = false;
   }
+
+  Admin()
+  {
+    this.IsAdmin = !this.IsAdmin
+  }
+
+  // getCurrentUser()
+  // {
+  //   this.accountService.currentUser$.subscribe({
+  //     next: user => this.loggedIn = !!user,
+  //     error : error => console.log(error)
+  //   })
+  // }
 
 }

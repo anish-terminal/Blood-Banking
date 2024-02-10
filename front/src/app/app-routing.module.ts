@@ -18,11 +18,11 @@ import { UserasdonorComponent } from './userasdonor/userasdonor.component';
 import { UserdashboardComponent } from './userdashboard/userdashboard.component';
 import { UserlistComponent } from './userlist/userlist.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
-import { DashboardComponent } from './maindashboard/dashboard/dashboard.component';
+import { MaindashboardComponent } from './maindashboard/maindashboard.component';
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
-  {path: 'main',component:DashboardComponent},
+  {path: 'dash',component: MaindashboardComponent},
   {path:'loginsuccess',component:LoginsuccessComponent,canActivate:[RouterGuard]},
   {path:'registration',component:RegistrationComponent},
   {path:'login',component:LoginComponent},

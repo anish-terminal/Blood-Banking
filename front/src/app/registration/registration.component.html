@@ -1,7 +1,7 @@
 <div class="container">
   <!--  Registration Form -->
   <h3 class="textual">Registration Form</h3>
-  <form #Registerform="ngForm" (ngSubmit)="registerUser()">
+  <form #Registerform="ngForm" (ngSubmit)="register()">
     <small class="text-danger"><b>{{ msg }}</b></small>
         <!-- Email Address  -->
     <div class="form-group">
@@ -11,7 +11,7 @@
           matInput
           placeholder="Enter your email"
           name="email"
-          [(ngModel)]="user.email"
+          [(ngModel)]="model.Email"
           required
           pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$"
           #email="ngModel"
@@ -31,7 +31,7 @@
           matInput
           placeholder="Enter username"
           name="username"
-          [(ngModel)]="user.username"
+          [(ngModel)]="model.Username"
           required
           #username="ngModel"
           [class.is-invalid]="username.invalid && username.touched"
@@ -48,7 +48,7 @@
         <mat-select
           placeholder="Select gender"
           name="gender"
-          [(ngModel)]="user.gender"
+          [(ngModel)]="model.Gender"
           #gender="ngModel"
           required
         >
@@ -68,7 +68,7 @@
         <mat-select
           placeholder="Select Blood Group"
           name="Blood Group"
-          [(ngModel)]="user.bloodgroup"
+          [(ngModel)]="model.BloodGroup"
           #bloodgroup="ngModel"
           required
         >
@@ -96,7 +96,7 @@
           type="number"
           placeholder="Enter your age"
           name="age"
-          [(ngModel)]="user.age"
+          [(ngModel)]="model.Age"
           required
           #age="ngModel"
           [class.is-invalid]="age.invalid && age.touched"
@@ -115,7 +115,7 @@
           type="tel"
           placeholder="Enter mobile number"
           name="mobile"
-          [(ngModel)]="user.mobile"
+          [(ngModel)]="model.Contact"
           required
           #mobile="ngModel"
           [class.is-invalid]="mobile.invalid && mobile.touched"
@@ -133,7 +133,7 @@
                [type]="showPassword ? 'text' : 'password'"
                placeholder="Enter your password"
                name="password"
-               [(ngModel)]="user.password"
+               [(ngModel)]="model.Password"
                required
                #password="ngModel"
                [ngClass]="{'is-invalid': password.invalid && password.touched}" />
@@ -147,7 +147,7 @@
       <small style="color: gray; font-size: 10px;">At least one uppercase, numeric digit, lowercase, special character, length of 6-20</small>
     </div>
     <!-- Confirm Password  -->
-    <div class="form-group">
+    <!-- <div class="form-group">
       <mat-form-field appearance="fill" class="mat-form-field-custom">
         <mat-label>Confirm Password</mat-label>
         <input
@@ -166,7 +166,7 @@
           <span *ngIf="confirmPassword.value !== user.password"><b>Passwords do not match</b></span>
         </mat-error>
       </mat-form-field>
-    </div>
+    </div> -->
 
     <div class="checkbox" style="margin-top: 5px">
       <mat-checkbox name="remember">I agree to all Terms & conditions</mat-checkbox>

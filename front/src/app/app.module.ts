@@ -33,7 +33,7 @@ import {Component} from '@angular/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { DashboardComponent } from './maindashboard/dashboard/dashboard.component';
+import { MaindashboardComponent } from './maindashboard/maindashboard.component';
 
 
 
@@ -57,7 +57,7 @@ import { DashboardComponent } from './maindashboard/dashboard/dashboard.componen
     UserasdonorComponent,
     RequesthistoryfromuserComponent,
     SidebarComponent,
-    DashboardComponent,
+    MaindashboardComponent,
   ],
   imports: [
     BrowserModule,
